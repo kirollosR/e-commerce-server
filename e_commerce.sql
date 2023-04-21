@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2023 at 02:41 AM
+-- Generation Time: Apr 21, 2023 at 02:30 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -97,10 +97,21 @@ CREATE TABLE `user` (
   `email` varchar(100) NOT NULL,
   `phone` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `user_status_cd` int(11) DEFAULT NULL,
-  `user_type_cd` int(11) DEFAULT NULL
+  `user_type_cd` int(11) DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `name`, `email`, `phone`, `username`, `password`, `user_status_cd`, `user_type_cd`, `token`) VALUES
+(1, 'Kirollos', 'kirollos@yahoo.com', '0100000000', 'kiro', '12345678', 1, 0, NULL),
+(2, 'youssef', 'youssef@yahoo.com', '010000000', 'joo', '$2b$10$fXNCUAATq6e8dhsHTdq74.GJmQTegzCBKTVJXYHUi6n', 1, 1, '72f5e3919924782c4df53ff1636b49d0'),
+(7, 'youssef', 'youssef1@yahoo.com', '010000000', 'jo0o', '$2b$10$QC6y1t8FkS9DICb3JwEQFOTyN4AOf3Bccfvheex.IwL', 1, 1, 'e8b492997ae20244ba4158ab48cd7da0'),
+(11, 'youssef', 'youssef2@yahoo.com', '010000000', 'j0o', '$2b$10$F9..2J0gYBQ2wsJ4q6Z5/e3J8VwJpJiUT9bR86y9/D8Vwnbt41upS', 1, 1, '4862d0efe51f5ac7b532f46fb169e3f6');
 
 -- --------------------------------------------------------
 
@@ -112,6 +123,14 @@ CREATE TABLE `user_status` (
   `id` int(11) NOT NULL,
   `user_status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_status`
+--
+
+INSERT INTO `user_status` (`id`, `user_status`) VALUES
+(1, 'Active'),
+(2, 'In-active');
 
 -- --------------------------------------------------------
 
@@ -147,8 +166,8 @@ ALTER TABLE `category`
 --
 ALTER TABLE `order`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `order_status_cd` (`order_status_cd`);
+  ADD KEY `order_ibfk_1` (`user_id`),
+  ADD KEY `order_ibfk_2` (`order_status_cd`);
 
 --
 -- Indexes for table `order_status`
@@ -161,15 +180,15 @@ ALTER TABLE `order_status`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `category_id` (`category_id`);
+  ADD KEY `product_ibfk_1` (`category_id`);
 
 --
 -- Indexes for table `product_order`
 --
 ALTER TABLE `product_order`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `order_id` (`order_id`),
-  ADD KEY `product_id` (`product_id`);
+  ADD KEY `product_order_ibfk_1` (`order_id`),
+  ADD KEY `product_order_ibfk_2` (`product_id`);
 
 --
 -- Indexes for table `user`
@@ -178,8 +197,8 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `username` (`username`),
-  ADD KEY `user_status_cd` (`user_status_cd`),
-  ADD KEY `user_type_cd` (`user_type_cd`);
+  ADD KEY `user_ibfk_1` (`user_status_cd`),
+  ADD KEY `user_ibfk_2` (`user_type_cd`);
 
 --
 -- Indexes for table `user_status`
@@ -231,13 +250,13 @@ ALTER TABLE `product_order`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user_status`
 --
 ALTER TABLE `user_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_type`
@@ -253,28 +272,28 @@ ALTER TABLE `user_type`
 -- Constraints for table `order`
 --
 ALTER TABLE `order`
-  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `order_ibfk_2` FOREIGN KEY (`order_status_cd`) REFERENCES `order_status` (`id`);
+  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `order_ibfk_2` FOREIGN KEY (`order_status_cd`) REFERENCES `order_status` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `product_order`
 --
 ALTER TABLE `product_order`
-  ADD CONSTRAINT `product_order_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`),
-  ADD CONSTRAINT `product_order_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
+  ADD CONSTRAINT `product_order_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `product_order_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`user_status_cd`) REFERENCES `user_status` (`id`),
-  ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`user_type_cd`) REFERENCES `user_type` (`id`);
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`user_status_cd`) REFERENCES `user_status` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`user_type_cd`) REFERENCES `user_type` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

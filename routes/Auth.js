@@ -59,7 +59,12 @@ router.post(
 
             if(checkPassword) {
                 delete user[0].password;
-                res.status(200).json(user[0]);
+                delete user[0].id;
+                res.status(200).json(
+                    {
+                        message: "Logged in successfully",
+                        user: user[0]
+                    });
             } else {
                 // res.status(200).json(user[0]);
                 res.status(404).json({ errors: [{message: "incorrect password"}] });
@@ -88,8 +93,12 @@ router.post(
         .notEmpty()
         .withMessage("name should not be empty"),
     body('password')
-        .isLength({min: 8, max: 20})
+        .notEmpty()
+        .withMessage('Password cannot be empty')
+        .isLength({min: 8})
         .withMessage("password should be between (8-20) character"),
+        // .matches(/^(?=.*[a-zA-Z])(?=.*\W)(?=.*\d).*$/)
+        // .withMessage('Password must contain at least 1 letter and 1 symbol'),
     async (req, res) => {
         try {
             //1. VALIDATION REQUEST
