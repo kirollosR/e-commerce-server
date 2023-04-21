@@ -11,6 +11,8 @@ app.use(cors()); // ALLOW HTTP REQUESTS LOCAL HOSTS (frontend talk to backend)
 
 // ====================  REQUIRE MODULES ====================
 const auth = require('./routes/auth');
+const authorized = require('./middlewares/authorize');
+const categories = require('./routes/Categories');
 // ====================  RUN APP ====================
 app.listen(4000, "localhost", () => {
     console.log("Server is running on http://localhost:4000");
@@ -18,3 +20,4 @@ app.listen(4000, "localhost", () => {
 
 // ====================  API ROUTES [ENDPOINTS] ====================
 app.use('/auth', auth);
+app.use('/categories', categories);
