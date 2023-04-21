@@ -127,7 +127,7 @@ router.post(
                 username: req.body.username,
                 // password: req.body.password,
                 password: await bcrypt.hash(req.body.password, 10), //hash password
-                user_type_cd: 1,
+                user_type_cd: 0,
                 user_status_cd: 1,
                 token: crypto.randomBytes(16).toString("hex"),
             }
