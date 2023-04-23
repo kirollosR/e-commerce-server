@@ -15,7 +15,7 @@ checkCategoryExist = async (id, res) => {
     return category;
 }
 router.post(
-    '/add-category',
+    '/addCategory',
     admin,
     body('category')
         .isString()
@@ -55,7 +55,7 @@ router.post(
 );
 
 router.put(
-    '/update-category/:id',
+    '/updateCategory/:id',
     admin,
     body('category')
         .isString()
@@ -98,7 +98,7 @@ router.put(
 );
 
 router.delete(
-    '/delete-category/:id',
+    '/deleteCategory/:id',
     admin,
     async (req, res) => {
         try{
@@ -130,7 +130,7 @@ router.get('',
     }
 )
 
-router.get('/get-category/:id',
+router.get('/getCategory/:id',
     async (req, res) => {
         const category = await checkCategoryExist(req.params.id, res);
         res.status(200).json(category);

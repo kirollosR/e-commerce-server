@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2023 at 02:30 AM
+-- Generation Time: Apr 23, 2023 at 11:49 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -32,6 +32,14 @@ CREATE TABLE `category` (
   `category` varchar(50) NOT NULL,
   `description` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `category`, `description`) VALUES
+(6, 'Watch', 'Smart Watch'),
+(7, 'Phones', 'Smart Phones');
 
 -- --------------------------------------------------------
 
@@ -108,10 +116,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `phone`, `username`, `password`, `user_status_cd`, `user_type_cd`, `token`) VALUES
-(1, 'Kirollos', 'kirollos@yahoo.com', '0100000000', 'kiro', '12345678', 1, 0, NULL),
-(2, 'youssef', 'youssef@yahoo.com', '010000000', 'joo', '$2b$10$fXNCUAATq6e8dhsHTdq74.GJmQTegzCBKTVJXYHUi6n', 1, 1, '72f5e3919924782c4df53ff1636b49d0'),
-(7, 'youssef', 'youssef1@yahoo.com', '010000000', 'jo0o', '$2b$10$QC6y1t8FkS9DICb3JwEQFOTyN4AOf3Bccfvheex.IwL', 1, 1, 'e8b492997ae20244ba4158ab48cd7da0'),
-(11, 'youssef', 'youssef2@yahoo.com', '010000000', 'j0o', '$2b$10$F9..2J0gYBQ2wsJ4q6Z5/e3J8VwJpJiUT9bR86y9/D8Vwnbt41upS', 1, 1, '4862d0efe51f5ac7b532f46fb169e3f6');
+(0, 'admin', 'admin@admin.com', '000000000000', 'admin', '$2b$10$P4wF2wULIg2G7sy1B7ylUO5Xx6.6yDs/7Ijpv9cJdZfoG0KKhrYcu', 1, 1, '5e6342178e3111a054f410f85ab1af71'),
+(13, 'kirollos', 'kirollos@yahoo.com', '010000000000', 'kiro', '$2b$10$aCh6S3aEQjr.2uNLY3PUBeMt/RkMxHC.2gMbU3rQuXxNlGCz73VZu', 1, 0, '670e667bca3ab4b594d7c6538f32bef8');
 
 -- --------------------------------------------------------
 
@@ -129,8 +135,8 @@ CREATE TABLE `user_status` (
 --
 
 INSERT INTO `user_status` (`id`, `user_status`) VALUES
-(1, 'Active'),
-(2, 'In-active');
+(1, 'active'),
+(2, 'in-active');
 
 -- --------------------------------------------------------
 
@@ -148,8 +154,8 @@ CREATE TABLE `user_type` (
 --
 
 INSERT INTO `user_type` (`id`, `user_type`) VALUES
-(0, 'Normal'),
-(1, 'Admin');
+(0, 'buyer'),
+(1, 'admin');
 
 --
 -- Indexes for dumped tables
@@ -220,7 +226,7 @@ ALTER TABLE `user_type`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `order`
@@ -250,7 +256,7 @@ ALTER TABLE `product_order`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `user_status`
