@@ -132,10 +132,7 @@ router.get('',
 
 router.get('/get-category/:id',
     async (req, res) => {
-        const category = await query("select * from category where id = ?", [req.params.id]);
-        if(!category[0]){
-            return res.status(404).json({errors: [{message: "category not found"}]});
-        }
+        const category = await checkCategoryExist(req.params.id, res);
         res.status(200).json(category);
 
     }
