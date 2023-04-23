@@ -25,4 +25,4 @@ app.get('/', (req, res) => {
 
 // ====================  API ROUTES [ENDPOINTS] ====================
 app.use('/auth', auth);
-app.use('/categories', admin, categories);
+app.use('/categories', categories);

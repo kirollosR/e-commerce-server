@@ -11,7 +11,12 @@ const query = util.promisify(db.query).bind(db); // transform query mysql --> pr
 checkEmailExist = async (email) => {
     // const query = util.promisify(db.query).bind(db); // transform query mysql --> promise to use [await/async]
     const checkEmail = await query(
-        "select * from user where email = ?",
+        "SELECT name, phone, username, email, `password`, user_status, token, user_type as user_type FROM user\n" +
+        "JOIN user_type\n" +
+        "ON user_type_cd = user_type.id\n" +
+        "JOIN user_status\n" +
+        "ON user_status_cd = user_status.id\n" +
+        "WHERE email = ?",
         [email]
     );
 
