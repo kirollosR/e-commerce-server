@@ -12,6 +12,7 @@ app.use(cors()); // ALLOW HTTP REQUESTS LOCAL HOSTS (frontend talk to backend)
 // ====================  REQUIRE MODULES ====================
 const auth = require('./routes/auth');
 const categories = require('./routes/categories');
+const products = require('./routes/products')
 const authorized = require('./middlewares/authorize');
 const admin = require('./middlewares/admin');
 // ====================  RUN APP ====================
@@ -26,3 +27,4 @@ app.get('/', (req, res) => {
 // ====================  API ROUTES [ENDPOINTS] ====================
 app.use('/auth', auth);
 app.use('/categories', categories);
+app.use('/products', products)

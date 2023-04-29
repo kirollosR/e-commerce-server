@@ -56,7 +56,7 @@ router.post(
             //2. CHECK IF EMAIL EXISTS
             const user = await checkEmailExist(req.body.email);
             if (user.length === 0) {
-                return res.status(404).json({ errors: [{ message: "email not found" }] });
+                return res.status(400).json({ errors: [{ message: "email not found" }] });
             }
 
             //3. CHECK IF PASSWORD IS CORRECT
@@ -100,8 +100,8 @@ router.post(
         .isLength({ min: 8 })
         .withMessage("password should be between (8-20) character"),
     // body('phone')
-    // .matches(/^(?=.*[a-zA-Z])(?=.*\W)(?=.*\d).*$/)
-    // .withMessage('Password must contain at least 1 letter and 1 symbol'),
+    //     .matches(/^(?=.*[a-zA-Z])(?=.*\W)(?=.*\d).*$/)
+    //     .withMessage('Password must contain at least 1 letter and 1 symbol'),
     async (req, res) => {
         try {
             //1. VALIDATION REQUEST
