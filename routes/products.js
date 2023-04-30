@@ -59,7 +59,6 @@ router.post(
                 return res.status(400).json({errors: [{msg: "Image is Required",},],});
             }
 
-            // TODO: add image upload
             // TODO: add category validation
 
             //3. CHECK IF CATEGORY EXIST
@@ -122,7 +121,6 @@ router.put(
             //2. CHECK IF PRODUCT EXIST OR NOT
             const product = await checkProductExist(req.params.id, res);
 
-            // TODO: add image upload
             // TODO: add category validation
 
             //3. CHECK IF CATEGORY EXIST

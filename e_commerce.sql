@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2023 at 11:49 PM
+-- Generation Time: Apr 30, 2023 at 03:19 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -24,6 +24,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_quantity` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `user_id`, `product_id`, `product_quantity`) VALUES
+(9, 0, 2, 2),
+(12, 13, 6, 5);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `category`
 --
 
@@ -38,8 +59,9 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `category`, `description`) VALUES
-(6, 'Watch', 'Smart Watch'),
-(7, 'Phones', 'Smart Phones');
+(6, 'Watch', 'Smart Watches'),
+(7, 'Phones', 'Smart Phones'),
+(8, 'Camera', 'Digital single-lens reflex camera');
 
 -- --------------------------------------------------------
 
@@ -73,12 +95,20 @@ CREATE TABLE `order_status` (
 CREATE TABLE `product` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `img` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
   `description` varchar(1000) DEFAULT NULL,
   `price` decimal(10,2) NOT NULL,
   `category_id` int(11) DEFAULT NULL,
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`id`, `name`, `image`, `description`, `price`, `category_id`, `quantity`) VALUES
+(2, 'Camera Canon', '1682793728650.jpeg', 'Digital Canon camera', '10000.00', 8, 15),
+(6, 'Samsung note 20', '1682795658860.jpeg', 'New samsung phone', '5000.50', 7, 0);
 
 -- --------------------------------------------------------
 
@@ -117,7 +147,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `name`, `email`, `phone`, `username`, `password`, `user_status_cd`, `user_type_cd`, `token`) VALUES
 (0, 'admin', 'admin@admin.com', '000000000000', 'admin', '$2b$10$P4wF2wULIg2G7sy1B7ylUO5Xx6.6yDs/7Ijpv9cJdZfoG0KKhrYcu', 1, 1, '5e6342178e3111a054f410f85ab1af71'),
-(13, 'kirollos', 'kirollos@yahoo.com', '010000000000', 'kiro', '$2b$10$aCh6S3aEQjr.2uNLY3PUBeMt/RkMxHC.2gMbU3rQuXxNlGCz73VZu', 1, 0, '670e667bca3ab4b594d7c6538f32bef8');
+(13, 'kirollos', 'kirollos@yahoo.com', '010000000000', 'kiro', '$2b$10$aCh6S3aEQjr.2uNLY3PUBeMt/RkMxHC.2gMbU3rQuXxNlGCz73VZu', 1, 0, '670e667bca3ab4b594d7c6538f32bef8'),
+(14, 'Kirollos', 'kirollos1@yahoo.com', '01288464506', 'kirogf', '$2b$10$icwQrEblLbcihIexoOY7dOVNK9vW5S4EeuaKE1D7w1z.vQGGZ6CW.', 1, 0, 'f4e322645c24becc37ac0c0472898dc1');
 
 -- --------------------------------------------------------
 
@@ -160,6 +191,14 @@ INSERT INTO `user_type` (`id`, `user_type`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `category`
@@ -223,10 +262,16 @@ ALTER TABLE `user_type`
 --
 
 --
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `order`
@@ -244,7 +289,7 @@ ALTER TABLE `order_status`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `product_order`
@@ -256,7 +301,7 @@ ALTER TABLE `product_order`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `user_status`
@@ -273,6 +318,13 @@ ALTER TABLE `user_type`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
 
 --
 -- Constraints for table `order`
