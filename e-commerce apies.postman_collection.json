@@ -1054,16 +1054,15 @@
 									}
 								],
 								"url": {
-									"raw": "http://localhost:4000/orders/deleteOrder/7",
+									"raw": "http://localhost:4000/deleteUser/14",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "4000",
 									"path": [
-										"orders",
-										"deleteOrder",
-										"7"
+										"deleteUser",
+										"14"
 									]
 								}
 							},
