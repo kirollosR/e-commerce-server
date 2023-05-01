@@ -10,10 +10,12 @@ const cors = require("cors");
 app.use(cors()); // ALLOW HTTP REQUESTS LOCAL HOSTS (frontend talk to backend)
 
 // ====================  REQUIRE MODULES ====================
-const auth = require('./routes/auth');
+const {router: auth} = require('./routes/auth');
 const categories = require('./routes/categories');
 const products = require('./routes/products');
-const cart = require('./routes/cart');
+const {router: cart} = require('./routes/cart');
+const orders = require('./routes/orders');
+const user = require('./routes/user');
 const authorized = require('./middlewares/authorize');
 const admin = require('./middlewares/admin');
 // ====================  RUN APP ====================
@@ -30,3 +32,5 @@ app.use('/auth', auth);
 app.use('/categories', categories);
 app.use('/products', products)
 app.use('', authorized, cart);
+app.use('/orders', authorized, orders);
+app.use('', authorized, user);

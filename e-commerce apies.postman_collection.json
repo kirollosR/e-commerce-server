@@ -1,0 +1,1077 @@
+{
+	"info": {
+		"_postman_id": "cb5578e9-c462-4e49-a270-fa7be454ca32",
+		"name": "e-commerce apies",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21278568"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"kirollos\",\r\n    \"password\": \"12345678\",\r\n    \"email\": \"kirollos@yahoo.com\",\r\n    \"username\": \"kiro\",\r\n    \"phone\": \"010000000000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/auth/register/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"auth",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"12345678\",\r\n    \"email\": \"kirollos@yahoo.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/auth/login/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"auth",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Add category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "5e6342178e3111a054f410f85ab1af71",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "670e667bca3ab4b594d7c6538f32bef8",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category\": \"Camera\",\r\n    \"description\": \"Digital single-lens reflex camera\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/categories/addCategory/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"categories",
+								"addCategory",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update category",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "5e6342178e3111a054f410f85ab1af71",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "670e667bca3ab4b594d7c6538f32bef8",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category\": \"Watch\",\r\n    \"description\": \"Smart Watches\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/categories/updateCategory/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"categories",
+								"updateCategory",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete category",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "5e6342178e3111a054f410f85ab1af71",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "670e667bca3ab4b594d7c6538f32bef8",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/categories/deleteCategory/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"categories",
+								"deleteCategory",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get category by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/categories/getCategory/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"categories",
+								"getCategory",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Add product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "5e6342178e3111a054f410f85ab1af71",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Samsung note 20",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "New samsung phone",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "5000.50",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "mob",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/DELL/Downloads/download.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/products/addProduct/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"products",
+								"addProduct",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update product",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "5e6342178e3111a054f410f85ab1af71",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Samsung note 20",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "New samsung phone",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "5000.50",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "phone",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/DELL/Downloads/download.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/products/updateProduct/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"products",
+								"updateProduct",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete product",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "5e6342178e3111a054f410f85ab1af71",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Samsung note 20",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "New samsung phone",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "5000.50",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "phone",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/DELL/Downloads/download.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/products/deleteProduct/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"products",
+								"deleteProduct",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get products",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "5e6342178e3111a054f410f85ab1af71",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Samsung note 20",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "New samsung phone",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "5000.50",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "phone",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/DELL/Downloads/download.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/products/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"products",
+								""
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "canon",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get products by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "5e6342178e3111a054f410f85ab1af71",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Samsung note 20",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "New samsung phone",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "5000.50",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "phone",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/DELL/Downloads/download.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/products/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"products",
+								"6"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "canon",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Add product to cart",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "5e6342178e3111a054f410f85ab1af71",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "670e667bca3ab4b594d7c6538f32bef8",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/product/addToCart/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"product",
+								"addToCart",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update quantity of product in cart",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "5e6342178e3111a054f410f85ab1af71",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "670e667bca3ab4b594d7c6538f32bef8",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantity\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/product/updateQuantity/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"product",
+								"updateQuantity",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete product from cart",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "5e6342178e3111a054f410f85ab1af71",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "670e667bca3ab4b594d7c6538f32bef8",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Samsung note 20",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "New samsung phone",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "5000.50",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "phone",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/DELL/Downloads/images.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/product/deleteFromCart/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"product",
+								"deleteFromCart",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get cart of user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "5e6342178e3111a054f410f85ab1af71",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/getCart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"getCart"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Get all orders",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "5e6342178e3111a054f410f85ab1af71",
+										"type": "text"
+									},
+									{
+										"key": "token",
+										"value": "670e667bca3ab4b594d7c6538f32bef8",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://localhost:4000/orders/getAllOrders",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"orders",
+										"getAllOrders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Accept order",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "5e6342178e3111a054f410f85ab1af71",
+										"type": "text"
+									},
+									{
+										"key": "token",
+										"value": "670e667bca3ab4b594d7c6538f32bef8",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://localhost:4000/orders/acceptOrder/8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"orders",
+										"acceptOrder",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Decline order",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "5e6342178e3111a054f410f85ab1af71",
+										"type": "text"
+									},
+									{
+										"key": "token",
+										"value": "670e667bca3ab4b594d7c6538f32bef8",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://localhost:4000/orders/declineOrder/9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"orders",
+										"declineOrder",
+										"9"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Get orders",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "5e6342178e3111a054f410f85ab1af71",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:4000/orders/getOrders",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"orders",
+										"getOrders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete order",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "5e6342178e3111a054f410f85ab1af71",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:4000/orders/deleteOrder/7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"orders",
+										"deleteOrder",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add order",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "5e6342178e3111a054f410f85ab1af71",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:4000/orders/addOrder/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"orders",
+										"addOrder",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User Manage",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Get user data",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "670e667bca3ab4b594d7c6538f32bef8",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:4000/userData",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"userData"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit user",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "670e667bca3ab4b594d7c6538f32bef8",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"kirollos Rafik\",\r\n    \"password\": \"12345678\",\r\n    \"email\": \"kirollos2@yahoo.com\",\r\n    \"username\": \"kiro\",\r\n    \"phone\": \"010000000000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/updateUser",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"updateUser"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Get all users",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "5e6342178e3111a054f410f85ab1af71",
+										"type": "text"
+									},
+									{
+										"key": "token",
+										"value": "670e667bca3ab4b594d7c6538f32bef8",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://localhost:4000/getAllUsers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"getAllUsers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete user",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "5e6342178e3111a054f410f85ab1af71",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:4000/orders/deleteOrder/7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"orders",
+										"deleteOrder",
+										"7"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

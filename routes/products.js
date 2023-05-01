@@ -14,11 +14,13 @@ categorySearch = async (categoryName, res) => {
         "FROM category\n" +
         "WHERE LOCATE(?, category) = 1;", [categoryName]);
     if(!category[0]){
-        return res.status(404).json({errors: [{message: "category not found"}]});
+        // return res.status(404).json({errors: [{message: "category not found"}]});
+        return false;
     } else{
         return category;
     }
 }
+
 
 checkProductExist = async (id, res) => {
     const product = await query("select * from product where id = ?", [id]);
@@ -54,16 +56,19 @@ router.post(
                 return res.status(400).json({ errors: errors.array() });
             }
 
-            //2. VALIDATE THE IMAGE
+            //2. CHECK IF CATEGORY EXIST
+            const category = await categorySearch(req.body.category, res);
+            // console.log(category[0].id);
+            if(!category){
+                return res.status(404).json({errors: [{message: "category not found"}]});
+            }
+
+            //3. VALIDATE THE IMAGE
             if (!req.file) {
-                return res.status(400).json({errors: [{msg: "Image is Required",},],});
+                return res.status(400).json({errors: [{message: "Image is Required",},],});
             }
 
             // TODO: add category validation
-
-            //3. CHECK IF CATEGORY EXIST
-            const category = await categorySearch(req.body.category, res);
-            // console.log(category[0].id);
 
             //4. PREPARE OBJECT PRODUCT TO SAVE
             const product = {

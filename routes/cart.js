@@ -1,17 +1,19 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../db/connection');
-const admin = require("../middlewares/admin");
-const {check, body, validationResult, checkSchema} = require("express-validator");
+const {body, validationResult} = require("express-validator");
 const util = require("util");
+
+const { getUserid } = require('./auth');
+
 
 const query = util.promisify(db.query).bind(db); // transform query mysql --> promise to use [await/async]
 
 checkProductExist = async (id, res) => {
     const product = await query("select * from product where id = ? AND quantity > 0", [id]);
     if(!product[0]){
-        return res.status(404).json({errors: [{message: "product not found or out of stock"}]});
-
+        // return res.status(404).json({errors: [{message: "product not found or out of stock"}]});
+        return false;
     }
     return product;
 }
@@ -25,19 +27,31 @@ checkProductInCart = async (product_id, user_id, res) => {
     return false;
 }
 
-getUserid = async (token, res) => {
-    const user = await query("select * from user where token = ?", [token]);
-    if(!user[0]){
-        return res.status(404).json({errors: [{message: "user not found"}]});
+isCartEmpty = async (user_id) => {
+    const cart = await query("select * from cart where user_id = ?", [user_id]);
+    if(!cart[0]){
+        return true;
     }
-    return user[0].id;
+    return false;
+}
+
+getCart = async (userId, req) => {
+    const cart = await query("SELECT * FROM cart\n" +
+        "WHERE cart.user_id = ?", [userId]);
+    return cart;
+}
+
+emptyCart = async (userId) => {
+    await query("DELETE FROM `cart` WHERE user_id = ?", userId)
 }
 
 router.post('/product/addToCart/:id',
     async (req, res) => {
         try{
             //1. CHECK IF PRODUCT EXIST
-            await checkProductExist(req.params.id, res);
+            if(!await checkProductExist(req.params.id, res)){
+                return res.status(404).json({errors: [{message: "product not found or out of stock"}]});
+            }
             const userId = await getUserid(req.headers.token, res);
 
             //2. CHECK IF PRODUCT ALREADY IN CART
@@ -139,4 +153,30 @@ router.put('/product/updateQuantity/:id',
         }
     }
 )
-module.exports = router;
+
+router.get('/getCart',
+    async (req, res) => {
+        try{
+            const userId = await getUserid(req.headers.token, res);
+            const cart = await query("SELECT product.name, cart.product_quantity, product.image FROM cart\n" +
+                "JOIN product ON product.id  = cart.product_id\n" +
+                "WHERE cart.user_id = ?", [userId]);
+            cart.map(product => {
+                product.image = "http://" + req.hostname + ":4000/" + product.image;
+            })
+            if(!cart[0]){
+                return res.status(404).json({errors: [{message: "cart is empty"}]});
+            }
+            res.status(200).json(
+                {
+                    message: "Cart",
+                    cart: cart
+                }
+            );
+        } catch (error){
+            res.statusCode = 500;
+            res.send({message: error});
+        }
+    }
+)
+module.exports = { router, isCartEmpty, getCart, emptyCart };

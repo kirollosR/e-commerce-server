@@ -4,6 +4,7 @@ const { body, validationResult } = require('express-validator');
 const util = require('util');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
+const authorized = require('../middlewares/authorize')
 
 const db = require('../db/connection');
 
@@ -31,6 +32,14 @@ checkUsernameExist = async (username) => {
     );
 
     return checkUsername;
+}
+
+getUserid = async (token, res) => {
+    const user = await query("select * from user where token = ?", [token]);
+    if(!user[0]){
+        return res.status(404).json({errors: [{message: "user not found"}]});
+    }
+    return user[0].id;
 }
 
 
@@ -99,9 +108,8 @@ router.post(
         .withMessage('Password cannot be empty')
         .isLength({ min: 8 })
         .withMessage("password should be between (8-20) character"),
-    // body('phone')
-    //     .matches(/^(?=.*[a-zA-Z])(?=.*\W)(?=.*\d).*$/)
-    //     .withMessage('Password must contain at least 1 letter and 1 symbol'),
+        // .matches(/^(?=.*[a-zA-Z])(?=.*\W)(?=.*\d).*$/)
+        // .withMessage('Password must contain at least 1 letter and 1 symbol'),
     async (req, res) => {
         try {
             //1. VALIDATION REQUEST
@@ -147,4 +155,13 @@ router.post(
         }
     }
 );
-module.exports = router;
+
+router.get('userData',
+    authorized,
+    async (req, res) => {
+        await query("select * from user where token = ?", [req.headers.token]);
+        res.status(200).json(user);
+
+    }
+    )
+module.exports = { router, getUserid };
