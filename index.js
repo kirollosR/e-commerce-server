@@ -19,10 +19,13 @@ const user = require('./routes/user');
 const authorized = require('./middlewares/authorize');
 const admin = require('./middlewares/admin');
 // ====================  RUN APP ====================
-app.listen(4000, "localhost", () => {
-    console.log("Server is running on http://localhost:4000");
-})
+// app.listen(4000, "localhost", () => {
+//     console.log("Server is running on http://localhost:4000");
+// })
 
+app.listen(process.env.PORT || 4000, () => {
+
+})
 app.get('/', (req, res) => {
     res.send('Welcome to E-Commerce Server');
 });
