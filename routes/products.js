@@ -57,7 +57,7 @@ router.post(
             }
 
             //2. CHECK IF CATEGORY EXIST
-            const category = await categorySearch(req.body.category, res);
+            // const category = await categorySearch(req.body.category, res);
             // console.log(category[0].id);
             if(!category){
                 return res.status(404).json({errors: [{message: "category not found"}]});
@@ -76,8 +76,8 @@ router.post(
                 description: req.body.description,
                 price: req.body.price,
                 quantity: req.body.quantity,
-                // category_id: req.body.category_id,
-                category_id: category[0].id,
+                category_id: req.body.category_id,
+                // category_id: category[0].id,
                 image: req.file.filename,
             }
 
