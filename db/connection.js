@@ -1,19 +1,22 @@
 var mysql      = require('mysql');
-// var connection = mysql.createConnection({
-//     host     : 'localhost',
-//     user     : 'root',
-//     password : '',
-//     database : 'e_commerce',
-//     port: 3306
-// });
 
+// LOCAL CONNECTION
 var connection = mysql.createConnection({
-    host     : 'sql7.freemysqlhosting.net',
-    user     : 'sql7616941',
-    password : 'q3RfLgGI43',
-    database : 'sql7616941',
+    host     : 'localhost',
+    user     : 'root',
+    password : '',
+    database : 'e_commerce',
     port: 3306
 });
+
+// HOST CONNECTION
+// var connection = mysql.createConnection({
+//     host     : 'sql7.freemysqlhosting.net',
+//     user     : 'sql7616941',
+//     password : 'q3RfLgGI43',
+//     database : 'sql7616941',
+//     port: 3306
+// });
 
 connection.connect(function(err) {
     if (err) {
