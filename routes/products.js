@@ -59,9 +59,9 @@ router.post(
             //2. CHECK IF CATEGORY EXIST
             // const category = await categorySearch(req.body.category, res);
             // console.log(category[0].id);
-            if(!category){
-                return res.status(404).json({errors: [{message: "category not found"}]});
-            }
+            // if(!category){
+            //     return res.status(404).json({errors: [{message: "category not found"}]});
+            // }
 
             //3. VALIDATE THE IMAGE
             if (!req.file) {
@@ -76,7 +76,7 @@ router.post(
                 description: req.body.description,
                 price: req.body.price,
                 quantity: req.body.quantity,
-                category_id: req.body.category_id,
+                category_id: req.body.category,
                 // category_id: category[0].id,
                 image: req.file.filename,
             }
