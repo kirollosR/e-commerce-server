@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2023 at 11:54 PM
+-- Generation Time: May 09, 2023 at 03:18 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -177,7 +177,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `phone`, `username`, `password`, `user_status_cd`, `user_type_cd`, `token`) VALUES
-(0, 'admin', 'admin@admin.com', '000000000000', 'admin', '$2b$10$P4wF2wULIg2G7sy1B7ylUO5Xx6.6yDs/7Ijpv9cJdZfoG0KKhrYcu', 1, 1, '5e6342178e3111a054f410f85ab1af71'),
+(0, 'admin', 'admin@admin.com', '000000000000', 'admin', '$2b$10$KBCNq6gtP9by2NYYDC07AuZVOIZ3Yry0SDdrvljbGP7HNGnjxBVSy', 1, 1, '5e6342178e3111a054f410f85ab1af71'),
 (13, 'kirollos Rafik', 'kirollos2@yahoo.com', '010000000000', 'kiro', '$2b$10$aCh6S3aEQjr.2uNLY3PUBeMt/RkMxHC.2gMbU3rQuXxNlGCz73VZu', 1, 0, '670e667bca3ab4b594d7c6538f32bef8');
 
 -- --------------------------------------------------------

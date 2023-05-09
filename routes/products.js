@@ -64,9 +64,9 @@ router.post(
             // }
 
             //3. VALIDATE THE IMAGE
-            if (!req.file) {
-                return res.status(400).json({errors: [{message: "Image is Required",},],});
-            }
+            // if (!req.file) {
+            //     return res.status(400).json({errors: [{message: "Image is Required",},],});
+            // }
 
             // TODO: add category validation
 
@@ -211,6 +211,7 @@ router.get(
     '/:id',
     async (req, res) => {
         const product = await checkProductExist(req.params.id, res);
+        product[0].image = "http://" + req.hostname + ":4000/" + product[0].image;
         res.status(200).json(product[0]);
     }
 )
