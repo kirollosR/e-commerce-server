@@ -4,6 +4,7 @@ const db = require('../db/connection');
 const admin = require("../middlewares/admin");
 const {body, validationResult} = require("express-validator");
 const util = require("util");
+const bcrypt = require("bcrypt");
 
 const query = util.promisify(db.query).bind(db); // transform query mysql --> promise to use [await/async]
 
@@ -64,12 +65,13 @@ router.put('/updateUser',
             }
 
             //4. UPDATE USER
-            if(!req.body.password) {
-                await query("update user set name = ?, email = ?, username = ?, password = ? where token = ?",
-                    [req.body.name, req.body.email, req.body.username, req.body.password, req.headers.token]);
+            if(req.body.password) {
+                const password = await bcrypt.hash(req.body.password, 10);
+                await query("update user set name = ?, email = ?, username = ?, password = ?, phone= ? where token = ?",
+                    [req.body.name, req.body.email, req.body.username, password, req.body.phone, req.headers.token]);
             } else {
-                await query("update user set name = ?, email = ?, username = ? where token = ?",
-                    [req.body.name, req.body.email, req.body.username, req.headers.token]);
+                await query("update user set name = ?, email = ?, username = ?, phone= ? where token = ?",
+                    [req.body.name, req.body.email, req.body.username, req.body.phone, req.headers.token]);
             }
             //5. GET UPDATED USER
             const user = await query("select name, email, username, phone from user where token = ?", [req.headers.token]);
