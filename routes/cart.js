@@ -158,7 +158,7 @@ router.get('/getCart',
     async (req, res) => {
         try{
             const userId = await getUserid(req.headers.token, res);
-            const cart = await query("SELECT product.name, cart.product_quantity, product.image FROM cart\n" +
+            const cart = await query("SELECT product.id, product.name, cart.product_quantity, product.image FROM cart\n" +
                 "JOIN product ON product.id  = cart.product_id\n" +
                 "WHERE cart.user_id = ?", [userId]);
             cart.map(product => {
