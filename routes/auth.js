@@ -146,7 +146,12 @@ router.post(
             //5. INSERT USER OBJECT INTO DB
             await query("insert into user set ?", user);
             delete user.password;
-            res.status(200).json(user);
+            // res.status(200).json(user);
+            res.status(200).json(
+                {
+                    message: "Registered successfully",
+                    user: user
+                });
 
 
         } catch (error) {
